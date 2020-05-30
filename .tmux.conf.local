@@ -245,3 +245,13 @@ tmux_conf_theme_clock_style='24'
 
 set-option -g prefix `
 set-option -g mouse on
+
+# copy selection
+setw -g mode-keys vi
+unbind -T copy-mode-vi MouseDragEnd1Pane
+unbind -T copy-mode-vi Space
+bind -T copy-mode-vi Space send-keys -X copy-pipe "pbcopy" \; send -X clear-selection
+
+# scroll speed
+bind -T copy-mode-vi WheelUpPane send -N1 -X scroll-up \; send -X clear-selection
+bind -T copy-mode-vi WheelDownPane send -N1 -X scroll-down \; send -X clear-selection
